@@ -28,7 +28,6 @@ public class ConnectionTCP implements ConnectionType {
 	private ObjectInputStream in;
 	
 	private Lock locker = new ReentrantLock();
-
 	
 	public Socket getS() {
 		return s;
@@ -165,6 +164,7 @@ public class ConnectionTCP implements ConnectionType {
 					e.printStackTrace();
 				}
 			}
+			
 			try {
 				this.out.writeObject(pack);
 				this.out.flush();

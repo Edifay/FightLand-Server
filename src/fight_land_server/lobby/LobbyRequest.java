@@ -49,12 +49,13 @@ public class LobbyRequest implements Runnable {
 				com.writeNextPacket(null, Communication.TCP, new Packet(0));
 				break;
 			}
-			case 2 : {// client ready to play
+			case 2: {// client ready to play
 				Lobby.getActualLobby().setReady(this.player);
 				break;
 			}
-			case 3 : {// client chose a champ
-				Lobby.getActualLobby().setGraphicsPlayer(this.player, (int) readDataByteToObject(pack.getData().get(0)));
+			case 3: {// client chose a champ
+				Lobby.getActualLobby().setGraphicsPlayer(this.player,
+						(int) readDataByteToObject(pack.getData().get(0)));
 				break;
 			}
 
@@ -69,7 +70,7 @@ public class LobbyRequest implements Runnable {
 			System.out.println("Disconected : Ip : " + com.getConnectionTCP().getS().getInetAddress() + ", port : "
 					+ com.getConnectionTCP().getS().getPort());
 			System.out.println("------------------------------------------");
-		}else {
+		} else {
 //			System.out.println("Change Connection Manager !");
 			// start the next RequestManager
 		}
@@ -89,7 +90,7 @@ public class LobbyRequest implements Runnable {
 		}
 		return null;
 	}
-	
+
 	public Object readDataByteToObject(byte[] data) {
 		ByteArrayInputStream in = new ByteArrayInputStream(data);
 		try {
@@ -100,35 +101,41 @@ public class LobbyRequest implements Runnable {
 		}
 		return null;
 	}
-	
+
 	public void sendThisNewPlayer(Player player) {
 		Packet packetPlayer = new Packet(2);
 		packetPlayer.add(getDataByte(player.getName()));
 		packetPlayer.add(getDataByte(player.getSelectedChamp()));
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, packetPlayer);
 	}
+
 	public void removeThisPlayer(Player player) {
 		Packet packetPlayer = new Packet(3);
 		packetPlayer.add(getDataByte(player.getName()));
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, packetPlayer);
 	}
+
 	public void setPlayerGraphics(Player player) {
 		Packet pack = new Packet(4);
 		pack.add(getDataByte(player.getName()));
 		pack.add(getDataByte(player.getSelectedChamp()));
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);
 	}
+
 	public void startPlayerLobby() {
 		Packet pack = new Packet(1);
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);
 	}
+
 	public void sendInterruptedLobby() {
 		Packet pack = new Packet(5);
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);
 	}
+
 	public void stopThisRequestManager() {
 		this.player = null;
 	}
+
 	public void sendStartGame() {
 		Packet pack = new Packet(6);
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);

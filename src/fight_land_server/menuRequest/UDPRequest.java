@@ -26,7 +26,7 @@ public class UDPRequest {
 				break;
 			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + pack.getPacketNumber());
+				System.out.println("ERROR Unknow response !");
 			}
 			
 		}

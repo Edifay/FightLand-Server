@@ -3,6 +3,7 @@ package fight_land_server.lobby;
 import java.util.ArrayList;
 
 import fight_land_server.Player;
+import fight_land_server.game.Game;
 
 public class Lobby {
 
@@ -89,7 +90,7 @@ public class Lobby {
 			for (int i = 0; i < this.players.size(); i++) {
 				this.players.get(i).getRequestManager().stopThisRequestManager();
 			}
-			
+			new Game(players);
 		} catch (InterruptedException e) {
 		}
 		if (this.players.size() < 2) {

@@ -1,5 +1,6 @@
 package fight_land_server;
 
+import fight_land_server.game.GameRequestManager;
 import fight_land_server.lobby.Lobby;
 import fight_land_server.lobby.LobbyRequest;
 import networkAPI.Communication;
@@ -10,6 +11,7 @@ public class Player {
 	private Communication com;
 	private Thread managerThread;
 	private LobbyRequest requestManager;
+	private GameRequestManager gameRequestManager;
 	private Lobby lob;
 	private int selectedChamp;
 	private Boolean readyToStart;
@@ -74,6 +76,14 @@ public class Player {
 
 	public void setReadyToStart(Boolean readyToStart) {
 		this.readyToStart = readyToStart;
+	}
+
+	public GameRequestManager getGameRequestManager() {
+		return this.gameRequestManager;
+	}
+
+	public void setGameRequestManager(GameRequestManager gameRequestManager) {
+		this.gameRequestManager = gameRequestManager;
 	}
 
 }

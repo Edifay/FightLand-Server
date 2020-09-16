@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import fight_land_server.Player;
 import networkAPI.Communication;
@@ -27,7 +28,7 @@ public class GameRequestManager implements Runnable {
 
 		Packet pack;
 		Communication com = this.player.getCommunication();
-		
+
 		while (this.player != null && this.player.getCommunication().getConnectionTCP().getS().isConnected()) {
 			pack = com.nextPacket(Communication.TCP);
 			if (pack == null)
@@ -37,9 +38,8 @@ public class GameRequestManager implements Runnable {
 			case 0: // ping response
 				com.writeNextPacket(null, Communication.TCP, new Packet(0));
 				break;
-			
 
-			default: 
+			default:
 				System.out.println("ERROR Unknow Response !");
 				break;
 			}
@@ -79,6 +79,12 @@ public class GameRequestManager implements Runnable {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void sendAtLoad(ArrayList<Integer> numberTextureLoad) {
+		Packet pack = new Packet(1);
+		pack.add(getDataByte(numberTextureLoad));
+		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);
 	}
 
 }

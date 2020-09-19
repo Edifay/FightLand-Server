@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import fight_land_server.AskID;
 import fight_land_server.Player;
 import fight_land_server.lobby.Lobby;
 import networkAPI.Communication;
@@ -21,7 +22,7 @@ public class MenuRequest implements Runnable {
 
 	@Override
 	public void run() {
-		this.player = new Player(this.com);
+		this.player = new Player(this.com, AskID.getAnID());
 		this.manageTCP();
 	}
 

@@ -87,4 +87,16 @@ public class GameRequestManager implements Runnable {
 		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);
 	}
 
+	public void sendPlayers(ArrayList<Player> players) {
+		Packet pack = new Packet(2);
+		for (int i = 0; i < players.size(); i++) {
+			ArrayList<Object> playersInfo = new ArrayList<Object>();
+			playersInfo.add((Long)players.get(i).getID());
+			playersInfo.add(players.get(i) == this.player ? (Boolean)true : (Boolean)false);
+			playersInfo.add((Integer)players.get(i).getSelectedChamp());
+			playersInfo.add((String)players.get(i).getName());
+			pack.add(getDataByte(playersInfo));
+		}
+		this.player.getCommunication().writeNextPacket(null, Communication.TCP, pack);
+	}
 }

@@ -15,11 +15,13 @@ public class Player {
 	private Lobby lob;
 	private int selectedChamp;
 	private Boolean readyToStart;
+	private long ID;
 	
-	public Player(Communication com) {
+	public Player(Communication com, long ID) {
 		this.com = com;
 		this.selectedChamp = -1;
 		this.readyToStart = false;
+		this.ID = ID;
 	}
 
 	public String getName() {
@@ -84,6 +86,14 @@ public class Player {
 
 	public void setGameRequestManager(GameRequestManager gameRequestManager) {
 		this.gameRequestManager = gameRequestManager;
+	}
+
+	public long getID() {
+		return this.ID;
+	}
+
+	public void setID(long iD) {
+		this.ID = iD;
 	}
 
 }

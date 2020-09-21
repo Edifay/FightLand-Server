@@ -38,7 +38,7 @@ public class GameRequestManager implements Runnable {
 			case 0: // ping response
 				com.writeNextPacket(null, Communication.TCP, new Packet(0));
 				break;
-
+				
 			default:
 				System.out.println("ERROR Unknow Response !");
 				break;

@@ -1,5 +1,8 @@
 package fight_land_server;
 
+import java.net.DatagramPacket;
+
+import fight_land_server.game.Game;
 import fight_land_server.game.GameRequestManager;
 import fight_land_server.lobby.Lobby;
 import fight_land_server.lobby.LobbyRequest;
@@ -16,6 +19,8 @@ public class Player {
 	private int selectedChamp;
 	private Boolean readyToStart;
 	private long ID;
+	private Game game;
+	private DatagramPacket packetForSend;
 	
 	public Player(Communication com, long ID) {
 		this.com = com;
@@ -94,6 +99,22 @@ public class Player {
 
 	public void setID(long iD) {
 		this.ID = iD;
+	}
+
+	public Game getGame() {
+		return this.game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public DatagramPacket getPacketForSend() {
+		return this.packetForSend;
+	}
+
+	public void setPacketForSend(DatagramPacket packetForSend) {
+		this.packetForSend = packetForSend;
 	}
 
 }
